@@ -1,0 +1,10 @@
+# Ignore .DS_Store files from mac
+.DS_Store
+*.DS_Store
+
+# Ignore logs
+*.log
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
