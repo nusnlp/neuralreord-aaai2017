@@ -73,7 +73,6 @@ fi
 mkdir -p ${MODEL_DIR}
 
 echo Training back-propagation - started: `date`
-source activate py27-tf12
 export THEANO_FLAGS=base_compiledir=/tmp/christian/theano.NOBACKUP,mode=FAST_RUN,floatX=float32,on_unused_input=warn,deterministic=more,device=cuda${M1}
 python ${TRAINER} -vcb ${VCB_FILE} -emb ${W2V_FILE} -tr ${PAR_TRAIN_PREFIX}.${SRC_LANG}.mmap -dev ${PAR_DEV_PREFIX}.${SRC_LANG}.mmap \
     -out ${PAR_MODEL} -lr ${LR} -H ${HIDDENS} -mb ${PAR_BATCH} -do ${DROPOUTS} -E ${EPOCHS} -rs ${SEED} &> ${MODEL_DIR}/trace-par.log &
@@ -83,5 +82,4 @@ python ${TRAINER} -vcb ${VCB_FILE} -emb ${W2V_FILE} -tr ${SIB_TRAIN_PREFIX}.${SR
     -out ${SIB_MODEL} -lr ${LR} -H ${HIDDENS} -mb ${SIB_BATCH} -do ${DROPOUTS} -E ${EPOCHS} -rs ${SEED} &> ${MODEL_DIR}/trace-sib.log &
 
 wait
-source deactivate
 echo Training back-propagation - finished: `date`
