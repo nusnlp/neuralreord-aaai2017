@@ -17,7 +17,14 @@ REQUIREMENTS
 * python==2.7
 * theano==1.0.3
 
-Running the Sample Scripts
+
+Preparing Vocabulary
+--------------------
+
+You need to first prepare a vocabulary, like `zh.jdp.vcb`, consisting of words, part-of-speech tags (suffixed with `<T>`), dependency relation labels (suffixed with `<L>`), distance feature (suffixed with `<D>`), and punctuation existence feature (suffixed with `<,>`).
+
+
+Processing Word Embeddings
 --------------------------
 
 Downloading and extracting the pretrained embeddings (binary word2vec format):
@@ -33,6 +40,10 @@ bash runfilterembedding.sh {linear,dep}
 ```
 where `linear` refers to the standard `word2vec` embeddings and `dep` refers to the dependency-based `word2vec` embeddings [(Bansal et al., 2014)](https://www.aclweb.org/anthology/P14-2131), which we trained based on our best understanding.
 
+
+Preparing Instances
+-------------------
+
 The input data should consist of training and development (tuning) data. Each of these should contain one dependency-parsed source-language file in CoNLL-X format and one alignment file in Giza++ format, that is, `<src_pos>-<trg_pos> ... <src_pos>-<trg_pos>`. Please refer to the example shown for the training data, namely `train.zh.jdp` for the source-language file and `train.align` for the alignment file, and similarly for development data. We cannot release the training data due to the license.
 
 The training instances should then be extracted from the training and development data (please replace with your real, reasonably-sized, data):
@@ -42,8 +53,14 @@ bash runprepare-swap.train.sh
 bash runprepare-swap.dev.sh
 ```
 
+
+Training the Models
+-------------------
+
 Training is done by calling the Python program as shown in the following script:
 
 ```
 bash runtrain.gen.sh <GPU1> <GPU2> <RANDOM_SEED>
 ```
+
+
